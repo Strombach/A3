@@ -22,5 +22,6 @@ $layoutView = new LayoutView();
 $userStorage = new \Model\UserStorage();
 $userStorage->loadUsers('users.json');
 
-
-$layoutView->render(false, $loginView, $dateView);
+if(!isset($_SESSION["loggedIn"])) {
+  $layoutView->render(false, $loginView, $dateView);
+}
