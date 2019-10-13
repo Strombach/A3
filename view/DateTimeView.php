@@ -5,8 +5,7 @@ date_default_timezone_set('Europe/Stockholm');
 class DateTimeView
 {
 
-
-  public function show()
+  public function showDate()
   {
     $dayText = date('l');
     $dateNum = date('jS');
