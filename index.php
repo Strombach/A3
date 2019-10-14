@@ -1,27 +1,11 @@
 <?php
 
-// INCLUDE THE FILES NEEDED...
-require_once('Model/UserStorage.php');
-require_once('View/LoginView.php');
-require_once('View/DateTimeView.php');
-require_once('View/LayoutView.php');
-require_once('Controller/LoginController.php');
-
-
-// MAKE SURE ERRORS ARE SHOWN... MIGHT WANT TO TURN THIS OFF ON A PUBLIC SERVER
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-ini_set('display_errors', 'On');
 
-// CREATE OBJECTS OF THE VIEWS
-$loginView = new LoginView();
-$dateView = new DateTimeView();
-$layoutView = new LayoutView();
+// INCLUDE THE FILES NEEDED...
+require_once('Application.php');
 
-// Create Objects of the userstorage and
-// loads all users in the file
-$userStorage = new \Model\UserStorage();
-$userStorage->loadUsers('users.json');
-
-if(!isset($_SESSION["loggedIn"])) {
-  $layoutView->render(false, $loginView, $dateView);
-}
+$app = new Application();
+$app->run();
