@@ -38,5 +38,9 @@ class Application
   private function generateLoginPage()
   {
     $this->layoutView->render(false, $this->loginView, $this->dateView);
+
+    if ($this->loginView->userTriesToLogin()) {
+      var_dump($this->loginView->getRequestInput());
+    }
   }
 }
