@@ -6,19 +6,24 @@ class UserStorage
 {
 
   private $jsonData;
-  private $phpObj;
+  private $members;
+
+  public function getMembers()
+  {
+    return $this->members;
+  }
 
   public function loadUsers($jsonFile)
   {
     $this->jsonData = file_get_contents($jsonFile, true);
-    $this->phpObj = json_decode($this->jsonData);
+    $this->members = json_decode($this->jsonData);
   }
 
   public function findUserByUsername($uname)
   {
-    for ($i = 0; $i < sizeof($this->phpObj); $i++) {
-      if ($this->phpObj[$i]->username === $uname) {
-        return $this->phpObj[$i];
+    for ($i = 0; $i < sizeof($this->members); $i++) {
+      if ($this->members[$i]->username === $uname) {
+        return $this->members[$i];
       }
     }
     return false;

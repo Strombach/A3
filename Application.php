@@ -23,9 +23,19 @@ class Application
     $this->loginView = new LoginView();
     $this->layoutView = new LayoutView();
     $this->dateView = new DateTimeView();
+    $this->loginController = new \Controller\LoginController($this->loginView, $this->storage);
   }
 
   public function run()
+  {
+    if (isset($_SESSION["loggedIn"])) {
+      echo "Logged In";
+    } else {
+      $this->generateLoginPage();
+    }
+  }
+
+  private function generateLoginPage()
   {
     $this->layoutView->render(false, $this->loginView, $this->dateView);
   }
