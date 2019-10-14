@@ -19,16 +19,6 @@ class UserStorage
     $this->members = json_decode($this->jsonData);
   }
 
-  public function findUserByUsername($uname)
-  {
-    for ($i = 0; $i < sizeof($this->members); $i++) {
-      if ($this->members[$i]->username === $uname) {
-        return $this->members[$i];
-      }
-    }
-    return false;
-  }
-
   public function authAUser($creds)
   {
     $user = $this->findUserByUsername($creds[0]);
@@ -44,6 +34,13 @@ class UserStorage
     }
   }
 
-  public function saveUser($newUser)
-  { }
+  private function findUserByUsername($uname)
+  {
+    for ($i = 0; $i < sizeof($this->members); $i++) {
+      if ($this->members[$i]->username === $uname) {
+        return $this->members[$i];
+      }
+    }
+    return false;
+  }
 }

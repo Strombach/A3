@@ -1,5 +1,7 @@
 <?php
 
+use controller\LoginController;
+
 require_once('Model/UserStorage.php');
 require_once('View/LoginView.php');
 require_once('View/DateTimeView.php');
@@ -28,19 +30,19 @@ class Application
 
   public function run()
   {
+    if ($this->loginView->userTriesToLogin()) {
+      $this->loginController->doTryLoginUser();
+    }
+
     if (isset($_SESSION["loggedIn"])) {
-      echo "Logged In";
+      $this->layoutView->render(true, $this->loginView, $this->dateView);
     } else {
-      $this->generateLoginPage();
+      $this->renderLoginPage();
     }
   }
 
-  private function generateLoginPage()
+  private function renderLoginPage()
   {
     $this->layoutView->render(false, $this->loginView, $this->dateView);
-
-    if ($this->loginView->userTriesToLogin()) {
-      var_dump($this->loginView->getRequestInput());
-    }
   }
 }

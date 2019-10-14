@@ -2,15 +2,31 @@
 
 namespace controller;
 
+use Exception;
+
 class LoginController
 {
 
-  private $loginView;
+  private $view;
   private $userStorage;
 
   public function __construct($loginView, $userStorage)
   {
-    $this->loginView = $loginView;
+    $this->view = $loginView;
     $this->userStorage = $userStorage;
+  }
+
+  public function doTryLoginUser()
+  {
+    try {
+      $input = $this->view->getRequestInput();
+      if ($this->userStorage->authAUser($input)) {
+        $_SESSION["loggedIn"] = true;
+      } else {
+        echo "Failed to login";
+      };
+    } catch (Exception $e) {
+      var_dump($e);
+    }
   }
 }
