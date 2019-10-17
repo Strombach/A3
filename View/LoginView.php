@@ -77,23 +77,21 @@ class LoginView
     return isset($_POST[self::$login]);
   }
 
-  public function getRequestInput()
+  public function getRequestUserName()
   {
-    $input = array();
-
-    array_push($input, $this->getRequestUserName());
-    array_push($input, $this->getRequestPassword());
-
-    return $input;
+    if(!empty($_POST[self::$name])) {
+      return $_POST[self::$name];
+    } else {
+      throw new \UserNameMissing("Username Missing");
+    }
   }
 
-  private function getRequestUserName()
+  public function getRequestPassword()
   {
-    return $_POST[self::$name];
-  }
-
-  private function getRequestPassword()
-  {
-    return $_POST[self::$password];
+    if(!empty($_POST[self::$password])) {
+      return $_POST[self::$password];
+    } else {
+      throw new \PasswordMissing("Password Missing");
+    }
   }
 }
