@@ -1,5 +1,7 @@
 <?php
 
+namespace View;
+
 date_default_timezone_set('Europe/Stockholm');
 
 class DateTimeView

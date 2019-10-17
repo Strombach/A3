@@ -1,5 +1,7 @@
 <?php
 
+namespace View;
+
 class LoginView
 {
   private static $login = 'LoginView::Login';
@@ -11,6 +13,7 @@ class LoginView
   private static $keep = 'LoginView::KeepMeLoggedIn';
   private static $messageId = 'LoginView::Message';
 
+  private $message = '';
 
 
   /**
@@ -22,9 +25,7 @@ class LoginView
    */
   public function response()
   {
-    $message = '';
-
-    $response = $this->generateLoginFormHTML($message);
+    $response = $this->generateLoginFormHTML($this->message);
     //$response .= $this->generateLogoutButtonHTML($message);
     return $response;
   }
@@ -82,7 +83,7 @@ class LoginView
     if(!empty($_POST[self::$name])) {
       return $_POST[self::$name];
     } else {
-      throw new \UserNameMissing("Username Missing");
+      throw new \UserNameMissing();
     }
   }
 
@@ -91,7 +92,11 @@ class LoginView
     if(!empty($_POST[self::$password])) {
       return $_POST[self::$password];
     } else {
-      throw new \PasswordMissing("Password Missing");
+      throw new \PasswordMissing();
     }
+  }
+
+  public function setMessage(string $newMessage) {
+    $this->message = $newMessage;
   }
 }

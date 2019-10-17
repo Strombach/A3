@@ -11,35 +11,36 @@ require_once('Controller/LoginController.php');
 
 class Application
 {
-  private $loginController;
-  private $layoutView;
   private $loginView;
+  private $layoutView;
   private $dateView;
 
+  private $loginController;
 
   public function __construct()
   {
-    $this->loginView = new LoginView();
-    $this->layoutView = new LayoutView();
-    $this->dateView = new DateTimeView();
+    $this->loginView = new \View\LoginView();
+    $this->layoutView = new \View\LayoutView();
+    $this->dateView = new \View\DateTimeView();
+
     $this->loginController = new \Controller\LoginController($this->loginView);
   }
 
   public function run()
   {
-    if (isset($_SESSION["loggedIn"])) {
-      $this->layoutView->render(true, $this->loginView, $this->dateView);
-    } else {
-      $this->renderLoginPage();
-    }
+    $isLoggedIn = $this->loginController->isLoggedInBySession();
 
     if ($this->loginView->userTriesToLogin()) {
-      $this->loginController->doTryLoginUser();
+      try {
+        $this->loginController->doTryLoginUser();
+      } catch(\UsernameMissing $e) {
+        $this->loginView->setMessage("Username is missing");
+      } catch(\PasswordMissing $e) {
+        $this->loginView->setMessage("Password is missing");
+      }
     }
-  }
 
-  private function renderLoginPage()
-  {
-    $this->layoutView->render(false, $this->loginView, $this->dateView);
+    $this->layoutView->render($isLoggedIn, $this->loginView, $this->dateView);
+
   }
 }
