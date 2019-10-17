@@ -14,11 +14,7 @@ class DateTimeView
     $monthAndYear = date('F Y');
     $time = date('G:i:s');
 
-    $timeString = "
-    $dayText, 
-    the $dateNum of $monthAndYear, 
-    The time is $time
-    ";
+    $timeString = "$dayText, the $dateNum of $monthAndYear, The time is $time";
 
     return '<p>' . $timeString . '</p>';
   }

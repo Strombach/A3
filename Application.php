@@ -33,14 +33,15 @@ class Application
     if ($this->loginView->userTriesToLogin()) {
       try {
         $this->loginController->doTryLoginUser();
-      } catch(\UsernameMissing $e) {
+      } catch (\UsernameMissing $e) {
         $this->loginView->setMessage("Username is missing");
-      } catch(\PasswordMissing $e) {
+      } catch (\PasswordMissing $e) {
         $this->loginView->setMessage("Password is missing");
+      } catch (\WrongCredentials $e) {
+        $this->loginView->setMessage("Wrong name or password");
       }
     }
 
     $this->layoutView->render($isLoggedIn, $this->loginView, $this->dateView);
-
   }
 }

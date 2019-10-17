@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Exception;
+
 class UserStorage
 {
 
@@ -19,18 +21,16 @@ class UserStorage
     $this->members = json_decode($this->jsonData);
   }
 
-  public function authAUser($creds)
+  public function authUser(string $username, string $password)
   {
-    $user = $this->findUserByUsername($creds[0]);
+    $user = $this->findUserByUsername($username);
 
     if ($user) {
-      if ($user->password == $creds[1]) {
+      if ($user->password == $password) {
         return true;
-      } else {
-        return false;
       }
     } else {
-      return false;
+      throw new \WrongCredentials();
     }
   }
 
