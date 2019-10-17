@@ -21,12 +21,15 @@ class LoginView
    *
    * Should be called after a login attempt has been determined
    *
-   * @return  void BUT writes to standard output and cookies!
+   * @return  string The HTML string that's pu in the body.
    */
-  public function response()
+  public function response($isLoggedIn): string
   {
-    $response = $this->generateLoginFormHTML($this->message);
-    //$response .= $this->generateLogoutButtonHTML($message);
+    if (!$isLoggedIn) {
+      $response = $this->generateLoginFormHTML($this->message);
+    } else {
+      $response .= $this->generateLogoutButtonHTML($this->message);
+    }
     return $response;
   }
 
@@ -52,6 +55,10 @@ class LoginView
    */
   private function generateLoginFormHTML($message)
   {
+    $username = '';
+    if (!empty($_POST[self::$name])) {
+      $username = $_POST[self::$name];
+    }
     return '
 			<form method="post" > 
 				<fieldset>
@@ -59,7 +66,7 @@ class LoginView
 					<p id="' . self::$messageId . '">' . $message . '</p>
 					
 					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="" />
+					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $username . '" />
 
 					<label for="' . self::$password . '">Password :</label>
 					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
@@ -80,7 +87,7 @@ class LoginView
 
   public function getRequestUserName()
   {
-    if(!empty($_POST[self::$name])) {
+    if (!empty($_POST[self::$name])) {
       return $_POST[self::$name];
     } else {
       throw new \UserNameMissing();
@@ -89,14 +96,15 @@ class LoginView
 
   public function getRequestPassword()
   {
-    if(!empty($_POST[self::$password])) {
+    if (!empty($_POST[self::$password])) {
       return $_POST[self::$password];
     } else {
       throw new \PasswordMissing();
     }
   }
 
-  public function setMessage(string $newMessage) {
+  public function setMessage(string $newMessage)
+  {
     $this->message = $newMessage;
   }
 }
