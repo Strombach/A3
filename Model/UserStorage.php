@@ -28,6 +28,8 @@ class UserStorage
     if ($user) {
       if ($user->password == $password) {
         return true;
+      } else {
+        throw new \WrongCredentials();
       }
     } else {
       throw new \WrongCredentials();
