@@ -22,7 +22,7 @@ class LoginController
     $password = $this->view->getRequestPassword();
 
     if ($this->userStorage->authUser($username, $password)) {
-      var_dump("Logged In");
+      $_SESSION["loggedIn"] = true;
     }
   }
 

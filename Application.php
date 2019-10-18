@@ -28,8 +28,6 @@ class Application
 
   public function run()
   {
-    $isLoggedIn = $this->loginController->isLoggedInBySession();
-
     if ($this->loginView->userTriesToLogin()) {
       try {
         $this->loginController->doTryLoginUser();
@@ -41,7 +39,7 @@ class Application
         $this->loginView->setMessage("Wrong name or password");
       }
     }
-
-    $this->layoutView->render($isLoggedIn, $this->loginView, $this->dateView);
+    $this->isLoggedIn = $this->loginController->isLoggedInBySession();
+    $this->layoutView->render($this->isLoggedIn, $this->loginView, $this->dateView);
   }
 }
