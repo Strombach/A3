@@ -70,9 +70,13 @@ class LoginView
 		';
   }
 
-  public function userTriesToLogin()
+  public function wantsToLogin()
   {
     return isset($_POST[self::$login]);
+  }
+
+  public function wantsToLogout () {
+    return isset($_POST[self::$logout]);
   }
 
   public function getRequestUserName()

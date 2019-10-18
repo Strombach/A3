@@ -16,7 +16,7 @@ class LoginController
     $this->userStorage->loadUsers('users.json');
   }
 
-  public function doTryLoginUser()
+  public function tryLoginUser()
   {
     $username = $this->view->getRequestUserName();
     $password = $this->view->getRequestPassword();
@@ -29,5 +29,10 @@ class LoginController
   public function isLoggedInBySession()
   {
     return isset($_SESSION["loggedIn"]);
+  }
+
+  public function logoutUser()
+  {
+    unset($_SESSION["loggedIn"]);
   }
 }
