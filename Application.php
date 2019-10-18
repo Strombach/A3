@@ -5,6 +5,7 @@ use controller\LoginController;
 require_once('Model/Exceptions.php');
 require_once('Model/UserStorage.php');
 require_once('Model/MemberCredentials.php');
+require_once('Model/SessionHandler.php');
 
 require_once('View/LoginView.php');
 require_once('View/DateTimeView.php');
@@ -19,6 +20,8 @@ class Application
   private $dateView;
 
   private $loginController;
+
+  private $isLoggedIn;
 
   public function __construct()
   {
