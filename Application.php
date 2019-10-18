@@ -4,9 +4,12 @@ use controller\LoginController;
 
 require_once('Model/Exceptions.php');
 require_once('Model/UserStorage.php');
+require_once('Model/MemberCredentials.php');
+
 require_once('View/LoginView.php');
 require_once('View/DateTimeView.php');
 require_once('View/LayoutView.php');
+
 require_once('Controller/LoginController.php');
 
 class Application
@@ -28,14 +31,15 @@ class Application
 
   public function run()
   {
-    $this->changeState();
+    $this->changeUserLoginState();
     $this->renderHTML();
   }
 
-  private function changeState() {
+  private function changeUserLoginState()
+  {
     if ($this->loginView->wantsToLogin()) {
       try {
-        $this->loginController->tryLoginUser();
+        $this->loginController->authorizeUser();
       } catch (\UsernameMissing $e) {
         $this->loginView->setMessage("Username is missing");
       } catch (\PasswordMissing $e) {
@@ -43,13 +47,14 @@ class Application
       } catch (\WrongCredentials $e) {
         $this->loginView->setMessage("Wrong name or password");
       }
-    } else if($this->loginView->wantsToLogout()) {
+    } else if ($this->loginView->wantsToLogout()) {
       $this->loginController->logoutUser();
     }
     $this->isLoggedIn = $this->loginController->isLoggedInBySession();
   }
 
-  private function renderHTML() {
+  private function renderHTML()
+  {
     $this->layoutView->render($this->isLoggedIn, $this->loginView, $this->dateView);
   }
 }

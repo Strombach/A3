@@ -2,8 +2,6 @@
 
 namespace Model;
 
-use Exception;
-
 class UserStorage
 {
 
@@ -15,34 +13,29 @@ class UserStorage
     return $this->members;
   }
 
-  public function loadUsers($jsonFile)
+  public function loadUsersFrom(string $jsonFile)
   {
     $this->jsonData = file_get_contents($jsonFile, true);
     $this->members = json_decode($this->jsonData);
   }
 
-  public function authUser(string $username, string $password)
+  public function findUserByUsername(string $username): \Model\MemberCredentials
   {
-    $user = $this->findUserByUsername($username);
-
-    if ($user) {
-      if ($user->password == $password) {
-        return true;
-      } else {
-        throw new \WrongCredentials();
+    for ($i = 0; $i < sizeof($this->members); $i++) {
+      if ($this->members[$i]->username === $username) {
+        $foundMember = new \Model\MemberCredentials($this->members[$i]->username, $this->members[$i]->password);
+        return $foundMember;
       }
+    }
+    throw new \WrongCredentials();
+  }
+
+  public function hasValidPassword(\Model\MemberCredentials $member, string $enteredPassword): bool
+  {
+    if ($member->password == $enteredPassword) {
+      return true;
     } else {
       throw new \WrongCredentials();
     }
-  }
-
-  private function findUserByUsername($uname)
-  {
-    for ($i = 0; $i < sizeof($this->members); $i++) {
-      if ($this->members[$i]->username === $uname) {
-        return $this->members[$i];
-      }
-    }
-    return false;
   }
 }

@@ -17,20 +17,20 @@ class LoginView
 
 
   /**
-   * Create HTTP response
+   * Create a HTML Body with loggin info and/or form.
    *
    * Should be called after a login attempt has been determined
    *
-   * @return  string The HTML string that's pu in the body.
+   * @return  string The HTML string that's put in the body.
    */
-  public function response($isLoggedIn): string
+  public function pageHTMLBody($isLoggedIn): string
   {
     if (!$isLoggedIn) {
-      $response = $this->generateLoginFormHTML($this->message);
+      $pageHTMLBody = $this->generateLoginFormHTML($this->message);
     } else {
-      $response = $this->generateLogoutButtonHTML($this->message);
+      $pageHTMLBody = $this->generateLogoutButtonHTML($this->message);
     }
-    return $response;
+    return $pageHTMLBody;
   }
 
   private function generateLogoutButtonHTML($message)
@@ -45,10 +45,8 @@ class LoginView
 
   private function generateLoginFormHTML($message)
   {
-    $username = '';
-    if (!empty($_POST[self::$name])) {
-      $username = $_POST[self::$name];
-    }
+    $username = $this->getPreviousEnteredUsername();
+    
     return '
 			<form method="post" > 
 				<fieldset>
@@ -100,5 +98,11 @@ class LoginView
   public function setMessage(string $newMessage)
   {
     $this->message = $newMessage;
+  }
+
+  private function getPreviousEnteredUsername(){
+    if (!empty($_POST[self::$name])) {
+      return $_POST[self::$name];
+    }
   }
 }

@@ -13,17 +13,16 @@ class LoginController
     $this->view = $loginView;
 
     $this->userStorage = new \Model\UserStorage();
-    $this->userStorage->loadUsers('users.json');
+    $this->userStorage->loadUsersFrom('users.json');
   }
 
-  public function tryLoginUser()
+  public function authorizeUser()
   {
-    $username = $this->view->getRequestUserName();
-    $password = $this->view->getRequestPassword();
+    $enteredUsername = $this->view->getRequestUserName();
+    $enteredPassword = $this->view->getRequestPassword();
 
-    if ($this->userStorage->authUser($username, $password)) {
-      $_SESSION["loggedIn"] = true;
-    }
+    $foundUser = $this->userStorage->findUserByUserName($enteredUsername);
+    $this->userStorage->hasValidPassword($foundUser, $enteredPassword);
   }
 
   public function isLoggedInBySession()
