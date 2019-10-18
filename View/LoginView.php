@@ -33,11 +33,6 @@ class LoginView
     return $response;
   }
 
-  /**
-   * Generate HTML code on the output buffer for the logout button
-   * @param $message, String output message
-   * @return  void, BUT writes to standard output!
-   */
   private function generateLogoutButtonHTML($message)
   {
     return '
@@ -48,11 +43,6 @@ class LoginView
 		';
   }
 
-  /**
-   * Generate HTML code on the output buffer for the logout button
-   * @param $message, String output message
-   * @return  void, BUT writes to standard output!
-   */
   private function generateLoginFormHTML($message)
   {
     $username = '';
