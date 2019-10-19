@@ -39,7 +39,7 @@ class LayoutView
 
   private function register(bool $isLoggedIn): string
   {
-    if (isset($_GET['register'])) {
+    if (isset($_GET['register']) && !$isLoggedIn) {
       return '<a href="?">Back to login</a>';
     } else if (!$isLoggedIn) {
       return '<a href="?register">Register a new user</a>';
