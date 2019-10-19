@@ -45,26 +45,28 @@ class LoginController
     return $isLoggedIn;
   }
 
-  public function authorizeUser()
+  private function authorizeUser()
   {
     $enteredUsername = $this->view->getRequestUserName();
     $enteredPassword = $this->view->getRequestPassword();
 
     $foundUser = $this->userStorage->findUserByUserName($enteredUsername);
+
     if ($this->userStorage->hasValidPassword($foundUser, $enteredPassword)) {
       $this->session->setSession(self::$loginSession);
     }
   }
 
-  public function isLoggedInBySession(): bool
+  private function isLoggedInBySession(): bool
   {
     return $this->session->isSessionSet(self::$loginSession);
   }
 
-  public function logoutUser()
+  private function logoutUser()
   {
     $this->session->unsetSession(self::$loginSession);
     $this->session->unsetSession(self::$welcomeSession);
+    $this->showBye();
   }
 
   private function showWelcome()
@@ -72,6 +74,14 @@ class LoginController
     if (!$this->session->isSessionSet(self::$welcomeSession)) {
       $this->view->setMessage('Welcome');
       $this->session->setSession(self::$welcomeSession);
+    }
+  }
+
+  private function showBye()
+  {
+    if (!$this->session->isSessionSet(self::$byeSession)) {
+      $this->view->setMessage('Bye bye!');
+      $this->session->setSession(self::$byeSession);
     }
   }
 }
