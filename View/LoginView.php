@@ -8,21 +8,11 @@ class LoginView
   private static $logout = 'LoginView::Logout';
   private static $name = 'LoginView::UserName';
   private static $password = 'LoginView::Password';
-  private static $cookieName = 'LoginView::CookieName';
-  private static $cookiePassword = 'LoginView::CookiePassword';
   private static $keep = 'LoginView::KeepMeLoggedIn';
   private static $messageId = 'LoginView::Message';
 
   private $message = '';
 
-
-  /**
-   * Create a HTML Body with loggin info and/or form.
-   *
-   * Should be called after a login attempt has been determined
-   *
-   * @return  string The HTML string that's put in the body.
-   */
   public function generateBodyHTML($isLoggedIn): string
   {
     if (!$isLoggedIn) {
