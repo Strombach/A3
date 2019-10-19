@@ -9,12 +9,36 @@ class RegisterView
   private static $password = 'RegisterView::Password';
   private static $passwordRepeat = 'RegisterView::PasswordRepeat';
   private static $messageId = 'RegisterView::Message';
+  private static $registerBtn = 'RegisterView::Register';
 
   private $message = '';
 
   public function wantsRegisterPage(): bool
   {
     return isset($_GET["register"]);
+  }
+
+  public function wantsToRegister()
+  {
+    return isset($_POST[self::$registerBtn]);
+  }
+
+  public function getPostUserName()
+  {
+    if (!empty($_POST[self::$name])) {
+      return $_POST[self::$name];
+    } else {
+      throw new \UserNameMissing();
+    }
+  }
+
+  public function getPostPassword()
+  {
+    if (!empty($_POST[self::$password])) {
+      return $_POST[self::$password];
+    } else {
+      throw new \PasswordMissing();
+    }
   }
 
   public function generateBodyHTML(): string

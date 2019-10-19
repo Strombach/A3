@@ -13,6 +13,7 @@ require_once('View/LayoutView.php');
 require_once('View/RegisterView.php');
 
 require_once('Controller/LoginController.php');
+require_once('Controller/RegisterController.php');
 
 class Application
 {
@@ -22,6 +23,7 @@ class Application
   private $registerView;
 
   private $loginController;
+  private $registerController;
 
   private $isLoggedIn;
 
@@ -33,6 +35,7 @@ class Application
     $this->registerView = new \View\RegisterView();
 
     $this->loginController = new \Controller\LoginController($this->loginView);
+    $this->registerController = new \Controller\RegisterController($this->registerView);
   }
 
   public function run()
@@ -42,6 +45,7 @@ class Application
     if (!$this->registerView->wantsRegisterPage()) {
       $this->renderLoginPageHTML();
     } else {
+      $this->registerController->registration();
       $this->renderRegisterPageHTML();
     }
   }
