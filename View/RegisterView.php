@@ -48,6 +48,8 @@ class RegisterView
 
   public function generateBodyHTML(): string
   {
+    $username = $this->getPreviousEnteredUsername();
+    
     return ' 
     <div class="container" >
     <h2>Register new user</h2>
@@ -56,7 +58,7 @@ class RegisterView
       <legend>Register a new user - Write username and password</legend>
         <p id="' . self::$messageId . '">' . $this->message . '</p>
         <label for="' . self::$name . '" >Username :</label>
-        <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="" />
+        <input type="text" size="20" name="' . self::$name . '" id="' . self::$name . '" value="' . $username . '" />
         <br/>
         <label for="' . self::$password . '" >Password  :</label>
         <input type="password" size="20" name="' . self::$password . '" id="' . self::$password . '" value="" />
@@ -69,5 +71,12 @@ class RegisterView
       </fieldset>
     </form>
     </div>';
+  }
+
+  private function getPreviousEnteredUsername()
+  {
+    if (!empty($_POST[self::$name])) {
+      return $_POST[self::$name];
+    }
   }
 }
