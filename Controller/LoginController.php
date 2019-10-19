@@ -8,7 +8,6 @@ class LoginController
   private static $welcomeSession = 'LoginController::welcome';
   private static $byeSession = 'LoginController::bye';
 
-
   private $view;
   private $userStorage;
 

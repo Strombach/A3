@@ -13,6 +13,39 @@ class LoginView
 
   private $message = '';
 
+  public function wantsToLogin()
+  {
+    return isset($_POST[self::$login]);
+  }
+
+  public function wantsToLogout()
+  {
+    return isset($_POST[self::$logout]);
+  }
+
+  public function getRequestUserName()
+  {
+    if (!empty($_POST[self::$name])) {
+      return $_POST[self::$name];
+    } else {
+      throw new \UserNameMissing();
+    }
+  }
+
+  public function getRequestPassword()
+  {
+    if (!empty($_POST[self::$password])) {
+      return $_POST[self::$password];
+    } else {
+      throw new \PasswordMissing();
+    }
+  }
+
+  public function setMessage(string $newMessage)
+  {
+    $this->message = $newMessage;
+  }
+
   public function generateBodyHTML($isLoggedIn): string
   {
     if (!$isLoggedIn) {
@@ -21,6 +54,14 @@ class LoginView
       $generateBodyHTML = $this->generateLogoutButtonHTML($this->message);
     }
     return $generateBodyHTML;
+  }
+
+
+  private function getPreviousEnteredUsername()
+  {
+    if (!empty($_POST[self::$name])) {
+      return $_POST[self::$name];
+    }
   }
 
   private function generateLogoutButtonHTML($message)
@@ -56,45 +97,5 @@ class LoginView
 				</fieldset>
 			</form>
 		';
-  }
-
-  public function wantsToLogin()
-  {
-    return isset($_POST[self::$login]);
-  }
-
-  public function wantsToLogout()
-  {
-    return isset($_POST[self::$logout]);
-  }
-
-  public function getRequestUserName()
-  {
-    if (!empty($_POST[self::$name])) {
-      return $_POST[self::$name];
-    } else {
-      throw new \UserNameMissing();
-    }
-  }
-
-  public function getRequestPassword()
-  {
-    if (!empty($_POST[self::$password])) {
-      return $_POST[self::$password];
-    } else {
-      throw new \PasswordMissing();
-    }
-  }
-
-  public function setMessage(string $newMessage)
-  {
-    $this->message = $newMessage;
-  }
-
-  private function getPreviousEnteredUsername()
-  {
-    if (!empty($_POST[self::$name])) {
-      return $_POST[self::$name];
-    }
   }
 }
