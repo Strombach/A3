@@ -15,6 +15,7 @@ class LayoutView
         </head>
         <body>
           <h1>Assignment 2</h1>
+          ' . $this->register($isLoggedIn) . '
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
           
           <div class="container">
@@ -33,6 +34,17 @@ class LayoutView
       return '<h2>Logged in</h2>';
     } else {
       return '<h2>Not logged in</h2>';
+    }
+  }
+
+  private function register(bool $isLoggedIn): string
+  {
+    if (isset($_GET['register'])) {
+      return '<a href="?">Back to login</a>';
+    } else if (!$isLoggedIn) {
+      return '<a href="?register">Register a new user</a>';
+    } else {
+      return '';
     }
   }
 }
