@@ -1,7 +1,5 @@
 <?php
 
-use controller\LoginController;
-
 require_once('Model/Exceptions.php');
 require_once('Model/UserStorage.php');
 require_once('Model/MemberCredentials.php');

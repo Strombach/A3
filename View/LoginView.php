@@ -23,7 +23,7 @@ class LoginView
     return isset($_POST[self::$logout]);
   }
 
-  public function getRequestUserName()
+  public function getPostUserName() // Post
   {
     if (!empty($_POST[self::$name])) {
       return $_POST[self::$name];
@@ -32,7 +32,7 @@ class LoginView
     }
   }
 
-  public function getRequestPassword()
+  public function getPostPassword()
   {
     if (!empty($_POST[self::$password])) {
       return $_POST[self::$password];

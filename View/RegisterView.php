@@ -2,6 +2,8 @@
 
 namespace View;
 
+use Controller\RegisterController;
+
 class RegisterView
 {
 
@@ -25,7 +27,7 @@ class RegisterView
 
   public function getPostUserName()
   {
-    if (!empty($_POST[self::$name]) && strlen($_POST[self::$name]) >= 3) {
+    if (strlen($_POST[self::$name]) >= \Controller\RegisterController::$minNameLength) {
       return $_POST[self::$name];
     } else {
       throw new \UsernameToShort();
@@ -34,10 +36,19 @@ class RegisterView
 
   public function getPostPassword()
   {
-    if (!empty($_POST[self::$password]) && strlen($_POST[self::$password]) >= 6) {
+    if (strlen($_POST[self::$password]) >= RegisterController::$minPasswordLength) {
       return $_POST[self::$password];
     } else {
       throw new \PasswordToShort();
+    }
+  }
+
+  public function getPostPasswordRepeat()
+  {
+    if (strlen($_POST[self::$password]) >= RegisterController::$minPasswordLength) {
+      return $_POST[self::$password];
+    } else {
+      throw new \PasswordsNotMatching();
     }
   }
 
@@ -49,7 +60,7 @@ class RegisterView
   public function generateBodyHTML(): string
   {
     $username = $this->getPreviousEnteredUsername();
-    
+
     return ' 
     <div class="container" >
     <h2>Register new user</h2>

@@ -46,8 +46,8 @@ class LoginController
 
   private function authorizeUser()
   {
-    $enteredUsername = $this->view->getRequestUserName();
-    $enteredPassword = $this->view->getRequestPassword();
+    $enteredUsername = $this->view->getPostUserName();
+    $enteredPassword = $this->view->getPostPassword();
 
     $foundUser = $this->userStorage->findUserByUserName($enteredUsername);
 

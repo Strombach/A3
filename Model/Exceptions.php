@@ -13,3 +13,5 @@ class UsernameToShort extends Exception
 { }
 class PasswordToShort extends Exception
 { }
+class PasswordsNotMatching extends Exception
+{ }
