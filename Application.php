@@ -40,6 +40,6 @@ class Application
 
   private function renderLoginPageHTML()
   {
-    $this->layoutView->render($this->isLoggedIn, $this->loginView, $this->dateView);
+    $this->layoutView->renderHTML($this->isLoggedIn, $this->loginView, $this->dateView);
   }
 }

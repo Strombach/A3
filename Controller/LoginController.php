@@ -4,6 +4,10 @@ namespace controller;
 
 class LoginController
 {
+  private static $loginSession = 'LoginController::isLoggedIn';
+  private static $welcomeSession = 'LoginController::welcome';
+  private static $byeSession = 'LoginController::bye';
+
 
   private $view;
   private $userStorage;
@@ -20,12 +24,13 @@ class LoginController
     $this->userStorage->loadUsersFrom('users.json');
   }
 
-  public function setUserLoginState()
+  public function setUserLoginState(): bool
   {
     $isLoggedIn = false;
     if ($this->view->wantsToLogin()) {
       try {
         $this->authorizeUser();
+        $this->showWelcome();
       } catch (\UsernameMissing $e) {
         $this->view->setMessage("Username is missing");
       } catch (\PasswordMissing $e) {
@@ -47,17 +52,24 @@ class LoginController
 
     $foundUser = $this->userStorage->findUserByUserName($enteredUsername);
     if ($this->userStorage->hasValidPassword($foundUser, $enteredPassword)) {
-      $this->session->setLoggedInSession();
+      $this->session->setSession(self::$loginSession);
     }
   }
 
-  public function isLoggedInBySession()
+  public function isLoggedInBySession(): bool
   {
-    return $this->session->isSessionSet("loggedIn");
+    return $this->session->isSessionSet(self::$loginSession);
   }
 
   public function logoutUser()
   {
-    $this->session->unsetLoggedInSession();
+    $this->session->unsetSession(self::$loginSession);
+    $this->session->unsetSession(self::$welcomeSession);
+  }
+
+  private function showWelcome()
+  {
+    $this->view->setMessage('Welcome');
+    $this->session->setSession(self::$welcomeSession);
   }
 }

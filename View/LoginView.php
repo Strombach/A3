@@ -23,14 +23,14 @@ class LoginView
    *
    * @return  string The HTML string that's put in the body.
    */
-  public function pageHTMLBody($isLoggedIn): string
+  public function generateBodyHTML($isLoggedIn): string
   {
     if (!$isLoggedIn) {
-      $pageHTMLBody = $this->generateLoginFormHTML($this->message);
+      $generateBodyHTML = $this->generateLoginFormHTML($this->message);
     } else {
-      $pageHTMLBody = $this->generateLogoutButtonHTML($this->message);
+      $generateBodyHTML = $this->generateLogoutButtonHTML($this->message);
     }
-    return $pageHTMLBody;
+    return $generateBodyHTML;
   }
 
   private function generateLogoutButtonHTML($message)
@@ -46,7 +46,7 @@ class LoginView
   private function generateLoginFormHTML($message)
   {
     $username = $this->getPreviousEnteredUsername();
-    
+
     return '
 			<form method="post" > 
 				<fieldset>
@@ -73,7 +73,8 @@ class LoginView
     return isset($_POST[self::$login]);
   }
 
-  public function wantsToLogout () {
+  public function wantsToLogout()
+  {
     return isset($_POST[self::$logout]);
   }
 
@@ -100,7 +101,8 @@ class LoginView
     $this->message = $newMessage;
   }
 
-  private function getPreviousEnteredUsername(){
+  private function getPreviousEnteredUsername()
+  {
     if (!empty($_POST[self::$name])) {
       return $_POST[self::$name];
     }

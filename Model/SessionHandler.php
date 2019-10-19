@@ -9,13 +9,13 @@ class SessionHandler
     return isset($_SESSION[$sessionKey]);
   }
 
-  public function setLoggedInSession()
+  public function setSession($sessionKey)
   {
-    $_SESSION["loggedIn"] = true;
+    $_SESSION[$sessionKey] = true;
   }
 
-  public function unsetLoggedInSession()
+  public function unsetSession($sessionKey)
   {
-    unset($_SESSION["loggedIn"]);
+    unset($_SESSION[$sessionKey]);
   }
 }
