@@ -9,9 +9,11 @@ class WrongCredentials extends Exception
 { }
 
 //Exceptions for registerview.
-class UsernameToShort extends Exception
+class UsernameTooShort extends Exception
 { }
-class PasswordToShort extends Exception
+class PasswordTooShort extends Exception
 { }
 class PasswordsNotMatching extends Exception
+{ }
+class InvalidCharacters extends Exception
 { }

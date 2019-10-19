@@ -23,7 +23,7 @@ class LoginView
     return isset($_POST[self::$logout]);
   }
 
-  public function getPostUserName() // Post
+  public function getPostUserName()
   {
     if (!empty($_POST[self::$name])) {
       return $_POST[self::$name];
@@ -67,10 +67,10 @@ class LoginView
   private function generateLogoutButtonHTML($message)
   {
     return '
-			<form  method="post" >
-				<p id="' . self::$messageId . '">' . $message . '</p>
-				<input type="submit" name="' . self::$logout . '" value="logout"/>
-			</form>
+		<form  method="post" >
+			<p id="' . self::$messageId . '">' . $message . '</p>
+			<input type="submit" name="' . self::$logout . '" value="logout"/>
+		</form>
 		';
   }
 
@@ -79,23 +79,21 @@ class LoginView
     $username = $this->getPreviousEnteredUsername();
 
     return '
-			<form method="post" > 
-				<fieldset>
-					<legend>Login - enter Username and password</legend>
-					<p id="' . self::$messageId . '">' . $message . '</p>
-					
-					<label for="' . self::$name . '">Username :</label>
-					<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $username . '" />
-
-					<label for="' . self::$password . '">Password :</label>
-					<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
-
-					<label for="' . self::$keep . '">Keep me logged in  :</label>
-					<input type="checkbox" id="' . self::$keep . '" name="' . self::$keep . '" />
-					
-					<input type="submit" name="' . self::$login . '" value="login" />
-				</fieldset>
-			</form>
+		<form method="post" > 
+			<fieldset>
+				<legend>Login - enter Username and password</legend>
+				<p id="' . self::$messageId . '">' . $message . '</p>
+				
+				<label for="' . self::$name . '">Username :</label>
+				<input type="text" id="' . self::$name . '" name="' . self::$name . '" value="' . $username . '" />
+				<label for="' . self::$password . '">Password :</label>
+				<input type="password" id="' . self::$password . '" name="' . self::$password . '" />
+				<label for="' . self::$keep . '">Keep me logged in  :</label>
+				<input type="checkbox" id="' . self::$keep . '" name="' . self::$keep . '" />
+				
+				<input type="submit" name="' . self::$login . '" value="login" />
+			</fieldset>
+		</form>
 		';
   }
 }

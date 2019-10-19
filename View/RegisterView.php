@@ -14,6 +14,7 @@ class RegisterView
   private static $registerBtn = 'RegisterView::Register';
 
   private $message = '';
+  private $previousUsername = '';
 
   public function wantsRegisterPage(): bool
   {
@@ -27,20 +28,12 @@ class RegisterView
 
   public function getPostUserName()
   {
-    if (strlen($_POST[self::$name]) >= \Controller\RegisterController::$minNameLength) {
-      return $_POST[self::$name];
-    } else {
-      throw new \UsernameToShort();
-    }
+    return $_POST[self::$name];
   }
 
   public function getPostPassword()
   {
-    if (strlen($_POST[self::$password]) >= RegisterController::$minPasswordLength) {
-      return $_POST[self::$password];
-    } else {
-      throw new \PasswordToShort();
-    }
+    return $_POST[self::$password];
   }
 
   public function getPostPasswordRepeat()
@@ -53,10 +46,18 @@ class RegisterView
     $this->message .= $newMessage;
   }
 
+  public function applyTagFilter(string $username): string
+  {
+    if (strip_tags($username) === $username) {
+      return $username;
+    } else {
+      throw new \InvalidCharacters;
+    }
+  }
+
   public function generateBodyHTML(): string
   {
     $username = $this->getPreviousEnteredUsername();
-
     return ' 
     <div class="container" >
     <h2>Register new user</h2>
@@ -77,13 +78,14 @@ class RegisterView
         <br/>
       </fieldset>
     </form>
-    </div>';
+    </div>
+    ';
   }
 
   private function getPreviousEnteredUsername()
   {
     if (!empty($_POST[self::$name])) {
-      return $_POST[self::$name];
+      return strip_tags($_POST[self::$name]);
     }
   }
 }
