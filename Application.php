@@ -34,29 +34,11 @@ class Application
 
   public function run()
   {
-    $this->changeUserLoginState();
-    $this->renderHTML();
+    $this->isLoggedIn = $this->loginController->setUserLoginState();
+    $this->renderLoginPageHTML();
   }
 
-  private function changeUserLoginState()
-  {
-    if ($this->loginView->wantsToLogin()) {
-      try {
-        $this->loginController->authorizeUser();
-      } catch (\UsernameMissing $e) {
-        $this->loginView->setMessage("Username is missing");
-      } catch (\PasswordMissing $e) {
-        $this->loginView->setMessage("Password is missing");
-      } catch (\WrongCredentials $e) {
-        $this->loginView->setMessage("Wrong name or password");
-      }
-    } else if ($this->loginView->wantsToLogout()) {
-      $this->loginController->logoutUser();
-    }
-    $this->isLoggedIn = $this->loginController->isLoggedInBySession();
-  }
-
-  private function renderHTML()
+  private function renderLoginPageHTML()
   {
     $this->layoutView->render($this->isLoggedIn, $this->loginView, $this->dateView);
   }

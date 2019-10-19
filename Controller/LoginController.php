@@ -10,14 +10,34 @@ class LoginController
 
   private $session;
 
-  public function __construct(\View\LoginView $loginView)
+  public function __construct(\View\LoginView $view)
   {
-    $this->view = $loginView;
+    $this->view = $view;
 
     $this->session = new \Model\SessionHandler();
 
     $this->userStorage = new \Model\UserStorage();
     $this->userStorage->loadUsersFrom('users.json');
+  }
+
+  public function setUserLoginState()
+  {
+    $isLoggedIn = false;
+    if ($this->view->wantsToLogin()) {
+      try {
+        $this->authorizeUser();
+      } catch (\UsernameMissing $e) {
+        $this->view->setMessage("Username is missing");
+      } catch (\PasswordMissing $e) {
+        $this->view->setMessage("Password is missing");
+      } catch (\WrongCredentials $e) {
+        $this->view->setMessage("Wrong name or password");
+      }
+    } else if ($this->view->wantsToLogout()) {
+      $this->logoutUser();
+    }
+    $isLoggedIn = $this->isLoggedInBySession();
+    return $isLoggedIn;
   }
 
   public function authorizeUser()
