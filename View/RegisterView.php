@@ -25,20 +25,25 @@ class RegisterView
 
   public function getPostUserName()
   {
-    if (!empty($_POST[self::$name])) {
+    if (!empty($_POST[self::$name]) && strlen($_POST[self::$name]) >= 3) {
       return $_POST[self::$name];
     } else {
-      throw new \UserNameMissing();
+      throw new \UsernameToShort();
     }
   }
 
   public function getPostPassword()
   {
-    if (!empty($_POST[self::$password])) {
+    if (!empty($_POST[self::$password]) && strlen($_POST[self::$password]) >= 6) {
       return $_POST[self::$password];
     } else {
-      throw new \PasswordMissing();
+      throw new \PasswordToShort();
     }
+  }
+
+  public function setMessage(string $newMessage)
+  {
+    $this->message .= $newMessage;
   }
 
   public function generateBodyHTML(): string
