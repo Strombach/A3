@@ -69,7 +69,9 @@ class LoginController
 
   private function showWelcome()
   {
-    $this->view->setMessage('Welcome');
-    $this->session->setSession(self::$welcomeSession);
+    if (!$this->session->isSessionSet(self::$welcomeSession)) {
+      $this->view->setMessage('Welcome');
+      $this->session->setSession(self::$welcomeSession);
+    }
   }
 }

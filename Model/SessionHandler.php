@@ -4,7 +4,7 @@ namespace Model;
 
 class SessionHandler
 {
-  public function isSessionSet(string $sessionKey)
+  public function isSessionSet(string $sessionKey): bool
   {
     return isset($_SESSION[$sessionKey]);
   }
