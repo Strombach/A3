@@ -45,11 +45,7 @@ class RegisterView
 
   public function getPostPasswordRepeat()
   {
-    if (strlen($_POST[self::$password]) >= RegisterController::$minPasswordLength) {
-      return $_POST[self::$password];
-    } else {
-      throw new \PasswordsNotMatching();
-    }
+    return $_POST[self::$passwordRepeat];
   }
 
   public function setMessage(string $newMessage)
