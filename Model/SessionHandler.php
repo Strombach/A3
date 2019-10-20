@@ -19,6 +19,11 @@ class SessionHandler
     $_SESSION[$sessionKey] = $username;
   }
 
+  public function getSessionValue($sessionKey)
+  {
+    return $_SESSION[$sessionKey];
+  }
+
   public function unsetSession($sessionKey)
   {
     unset($_SESSION[$sessionKey]);

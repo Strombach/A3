@@ -5,6 +5,8 @@ namespace View;
 class LayoutView
 {
 
+  private static $registerLocation = 'register';
+
   public function renderHTML(bool $isLoggedIn, $v, DateTimeView $dtv)
   {
     echo '<!DOCTYPE html>
@@ -39,7 +41,7 @@ class LayoutView
 
   private function register(bool $isLoggedIn): string
   {
-    if (isset($_GET['register']) && !$isLoggedIn) {
+    if (isset($_GET[self::$registerLocation]) && !$isLoggedIn) {
       return '<a href="?">Back to login</a>';
     } else if (!$isLoggedIn) {
       return '<a href="?register">Register a new user</a>';

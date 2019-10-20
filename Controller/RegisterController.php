@@ -50,9 +50,9 @@ class RegisterController
       $password = $this->view->getPostPassword();
       $this->registrationTester->arePasswordLegalLength($password, self::$minPasswordLength);
       $this->registrationTester->arePasswordsMatching($password, $this->view->getPostPasswordRepeat());
-    } catch (\PasswordTooShort $tooShortError) {
+    } catch (\PasswordTooShort $e) {
       $this->view->setMessage('Password has too few characters, at least ' . self::$minPasswordLength . ' characters.<br>');
-    } catch (\PasswordsNotMatching $notMatchingError) {
+    } catch (\PasswordsNotMatching $e) {
       $this->view->setMessage("Passwords do not match.");
     }
   }
