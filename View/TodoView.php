@@ -29,6 +29,11 @@ class TodoView
     $this->completeTodos = $todos;
   }
 
+  public function setNonCompleteTodos($todos)
+  {
+    $this->nonCompleteTodos = $todos;
+  }
+
   public function generateBodyHTML(): string
   {
     return '
@@ -72,7 +77,9 @@ class TodoView
     $ret = '<ol>';
 
     if (!empty($this->nonCompleteTodos) > 0) {
-      for ($i = 0; $i < sizeof($this->nonCompleteTodos); $i++) { }
+      for ($i = 0; $i < sizeof($this->nonCompleteTodos); $i++) {
+        $ret .= '<li>' . $this->nonCompleteTodos[$i]->todo . '</li>';
+      }
       $ret .= '</ol>';
     } else {
       $ret = '<p>Nothing to do yet</p>';

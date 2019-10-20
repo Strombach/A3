@@ -34,7 +34,6 @@ class TodoController
 
   private function presentCompleteTasks()
   {
-    var_dump($this->loggedInMember->todos);
     $this->view->setCompleteTodos($this->loggedInMember->todos);
   }
 }
