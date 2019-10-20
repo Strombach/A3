@@ -10,6 +10,7 @@ class LoginController
 
   private $view;
   private $userStorage;
+  private $authenticator;
 
   private $session;
 
@@ -21,14 +22,15 @@ class LoginController
 
     $this->userStorage = new \Model\UserStorage();
     $this->userStorage->loadUsersFrom('users.json');
+
+    $this->authenticator = new \Model\Authenticator();
   }
 
   public function setUserLoginState(): bool
   {
-    $isLoggedIn = false;
     if ($this->view->wantsToLogin()) {
       try {
-        $this->authorizeUser();
+        $this->authenticateUser();
         $this->showWelcome();
       } catch (\UsernameMissing $e) {
         $this->view->setMessage("Username is missing");
@@ -44,14 +46,14 @@ class LoginController
     return $isLoggedIn;
   }
 
-  private function authorizeUser()
+  private function authenticateUser()
   {
     $enteredUsername = $this->view->getPostUserName();
     $enteredPassword = $this->view->getPostPassword();
 
     $foundUser = $this->userStorage->findUserByUserName($enteredUsername);
 
-    if ($this->userStorage->hasValidPassword($foundUser, $enteredPassword)) {
+    if ($this->authenticator->hasValidPassword($foundUser, $enteredPassword)) {
       $this->session->setSession(self::$loginSession);
     }
   }

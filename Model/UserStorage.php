@@ -8,11 +8,6 @@ class UserStorage
   private $jsonData;
   private $members;
 
-  public function getMembers()
-  {
-    return $this->members;
-  }
-
   public function loadUsersFrom(string $jsonFile)
   {
     $this->jsonData = file_get_contents($jsonFile, true);
@@ -28,14 +23,5 @@ class UserStorage
       }
     }
     throw new \WrongCredentials();
-  }
-
-  public function hasValidPassword(\Model\MemberCredentials $member, string $enteredPassword): bool
-  {
-    if ($member->password == $enteredPassword) {
-      return true;
-    } else {
-      throw new \WrongCredentials();
-    }
   }
 }
