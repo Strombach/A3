@@ -9,22 +9,22 @@ class SessionHandler
     return isset($_SESSION[$sessionKey]);
   }
 
-  public function setSession($sessionKey)
+  public function setSession($sessionKey): void
   {
     $_SESSION[$sessionKey] = true;
   }
 
-  public function setLoginSession($sessionKey, $username)
+  public function setLoginSession($sessionKey, $username): void
   {
     $_SESSION[$sessionKey] = $username;
   }
 
-  public function getSessionValue($sessionKey)
+  public function getSessionValue($sessionKey): void
   {
     return $_SESSION[$sessionKey];
   }
 
-  public function unsetSession($sessionKey)
+  public function unsetSession($sessionKey): void
   {
     unset($_SESSION[$sessionKey]);
   }

@@ -45,7 +45,7 @@ class LoginController
     return $isLoggedIn;
   }
 
-  private function authenticateUser()
+  private function authenticateUser(): void
   {
     $enteredUsername = $this->view->getPostUserName();
     $enteredPassword = $this->view->getPostPassword();
@@ -62,14 +62,14 @@ class LoginController
     return $this->session->isSessionSet(self::$loginSession);
   }
 
-  private function logoutUser()
+  private function logoutUser(): void
   {
     $this->session->unsetSession(self::$loginSession);
     $this->session->unsetSession(self::$welcomeSession);
     $this->showBye();
   }
 
-  private function showWelcome()
+  private function showWelcome(): void
   {
     if (!$this->session->isSessionSet(self::$welcomeSession)) {
       $this->view->setMessage('Welcome');
@@ -77,7 +77,7 @@ class LoginController
     }
   }
 
-  private function showBye()
+  private function showBye(): void
   {
     if (!$this->session->isSessionSet(self::$byeSession)) {
       $this->view->setMessage('Bye bye!');

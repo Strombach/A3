@@ -8,7 +8,7 @@ class UserStorage
   private $jsonData;
   private $members;
 
-  public function loadUsersFrom(string $jsonFile)
+  public function loadUsersFrom(string $jsonFile): void
   {
     $this->jsonData = file_get_contents($jsonFile, true);
     $this->members = json_decode($this->jsonData);

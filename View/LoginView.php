@@ -13,17 +13,17 @@ class LoginView
 
   private $message = '';
 
-  public function wantsToLogin()
+  public function wantsToLogin(): bool
   {
     return isset($_POST[self::$login]);
   }
 
-  public function wantsToLogout()
+  public function wantsToLogout(): bool
   {
     return isset($_POST[self::$logout]);
   }
 
-  public function getPostUserName()
+  public function getPostUserName(): string
   {
     if (!empty($_POST[self::$name])) {
       return $_POST[self::$name];
@@ -41,12 +41,12 @@ class LoginView
     }
   }
 
-  public function setMessage(string $newMessage)
+  public function setMessage(string $newMessage): void
   {
     $this->message = $newMessage;
   }
 
-  public function generateBodyHTML($isLoggedIn): string
+  public function generateBodyHTML(bool $isLoggedIn): string
   {
     if (!$isLoggedIn) {
       $generateBodyHTML = $this->generateLoginFormHTML($this->message);
@@ -57,24 +57,24 @@ class LoginView
   }
 
 
-  private function getPreviousEnteredUsername()
+  private function getPreviousEnteredUsername(): string
   {
     if (!empty($_POST[self::$name])) {
       return $_POST[self::$name];
     }
   }
 
-  private function generateLogoutButtonHTML($message)
+  private function generateLogoutButtonHTML(string $message): string
   {
     return '
-		<form  method="post" >
-			<p id="' . self::$messageId . '">' . $message . '</p>
-			<input type="submit" name="' . self::$logout . '" value="logout"/>
-		</form>
-		';
+    <form  method="post" >
+      <p id="' . self::$messageId . '">' . $message . '</p>
+      <input type="submit" name="' . self::$logout . '" value="logout"/>
+    </form>
+    ';
   }
 
-  private function generateLoginFormHTML($message)
+  private function generateLoginFormHTML(string $message)
   {
     $username = $this->getPreviousEnteredUsername();
 
@@ -94,6 +94,6 @@ class LoginView
         <input type="submit" name="' . self::$login . '" value="login" />
       </fieldset>
     </form>
-		';
+    ';
   }
 }

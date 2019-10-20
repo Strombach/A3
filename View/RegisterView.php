@@ -2,8 +2,6 @@
 
 namespace View;
 
-use Controller\RegisterController;
-
 class RegisterView
 {
 
@@ -14,34 +12,33 @@ class RegisterView
   private static $registerBtn = 'RegisterView::Register';
 
   private $message = '';
-  private $previousUsername = '';
 
   public function wantsRegisterPage(): bool
   {
     return isset($_GET["register"]);
   }
 
-  public function wantsToRegister()
+  public function wantsToRegister(): bool
   {
     return isset($_POST[self::$registerBtn]);
   }
 
-  public function getPostUserName()
+  public function getPostUserName(): string
   {
     return $_POST[self::$name];
   }
 
-  public function getPostPassword()
+  public function getPostPassword(): string
   {
     return $_POST[self::$password];
   }
 
-  public function getPostPasswordRepeat()
+  public function getPostPasswordRepeat(): string
   {
     return $_POST[self::$passwordRepeat];
   }
 
-  public function setMessage(string $newMessage)
+  public function setMessage(string $newMessage): void
   {
     $this->message .= $newMessage;
   }
@@ -82,7 +79,7 @@ class RegisterView
     ';
   }
 
-  private function getPreviousEnteredUsername()
+  private function getPreviousEnteredUsername(): string
   {
     if (!empty($_POST[self::$name])) {
       return strip_tags($_POST[self::$name]);

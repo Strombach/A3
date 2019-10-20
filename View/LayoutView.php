@@ -7,7 +7,7 @@ class LayoutView
 
   private static $registerLocation = 'register';
 
-  public function renderHTML(bool $isLoggedIn, $v, DateTimeView $dtv)
+  public function renderHTML(bool $isLoggedIn, $v, DateTimeView $dtv): void
   {
     echo '<!DOCTYPE html>
       <html>

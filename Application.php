@@ -41,7 +41,7 @@ class Application
     $this->registerController = new \Controller\RegisterController($this->registerView, $this->userStorage);
   }
 
-  public function run()
+  public function run(): void
   {
     $this->isLoggedIn = $this->loginController->setUserLoginState();
 
@@ -53,7 +53,7 @@ class Application
     }
   }
 
-  private function renderLoginPageHTML()
+  private function renderLoginPageHTML(): void
   {
     $this->layoutView->renderHTML($this->isLoggedIn, $this->loginView, $this->dateView);
   }
