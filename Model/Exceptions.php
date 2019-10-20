@@ -17,3 +17,5 @@ class PasswordsNotMatching extends Exception
 { }
 class InvalidCharacters extends Exception
 { }
+class UsernameOccupied extends Exception
+{ }

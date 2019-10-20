@@ -14,14 +14,13 @@ class LoginController
 
   private $session;
 
-  public function __construct(\View\LoginView $view)
+  public function __construct(\View\LoginView $view, \Model\UserStorage $userStorage)
   {
     $this->view = $view;
 
     $this->session = new \Model\SessionHandler();
 
-    $this->userStorage = new \Model\UserStorage();
-    $this->userStorage->loadUsersFrom('users.json');
+    $this->userStorage = $userStorage;
 
     $this->authenticator = new \Model\Authenticator();
   }

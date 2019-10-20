@@ -5,6 +5,7 @@ require_once('Model/UserStorage.php');
 require_once('Model/MemberCredentials.php');
 require_once('Model/SessionHandler.php');
 require_once('Model/Authenticator.php');
+require_once('Model/RegistrationTester.php');
 
 require_once('View/LoginView.php');
 require_once('View/DateTimeView.php');
@@ -33,8 +34,11 @@ class Application
     $this->dateView = new \View\DateTimeView();
     $this->registerView = new \View\RegisterView();
 
-    $this->loginController = new \Controller\LoginController($this->loginView);
-    $this->registerController = new \Controller\RegisterController($this->registerView);
+    $this->userStorage = new \Model\UserStorage();
+    $this->userStorage->loadUsersFrom('users.json');
+
+    $this->loginController = new \Controller\LoginController($this->loginView, $this->userStorage);
+    $this->registerController = new \Controller\RegisterController($this->registerView, $this->userStorage);
   }
 
   public function run()
