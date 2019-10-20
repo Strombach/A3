@@ -18,20 +18,24 @@ class TodoController
     $this->sessionHandler = $session;
     $this->userStorage = $storage;
 
-    $this->loadMemberData();
-
-    $this->todoSorter = new \Model\TodoSorter($this->loggedInMember);
-
-    $this->presentLoggedInUser();
+    $this->updateView();
   }
 
   public function updateTodos()
   {
     if ($this->view->wantsToAddTodo()) {
       $this->addTodo();
-      $this->userStorage->loadUsersFromFile();
-      $this->presentNonCompleteTasks();
+      $this->updateView();
     }
+  }
+
+  public function updateView()
+  {
+    $this->loadMemberData();
+
+    $this->todoSorter = new \Model\TodoSorter($this->loggedInMember);
+
+    $this->presentLoggedInUser();
   }
 
   private function addTodo()
