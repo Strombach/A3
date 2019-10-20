@@ -74,9 +74,9 @@ class LoginView
     return '
     <form id="' . self::$logout . '" method="post" >
       <p id="' . self::$messageId . '">' . $message . '</p>
-      ' . $this->todoView->generateBodyHTML() . '
       <input type="submit" name="' . self::$logout . '" value="logout" form="' . self::$logout . '"/>
     </form>
+    ' . $this->todoView->generateBodyHTML() . '
     ';
   }
 

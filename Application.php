@@ -29,6 +29,9 @@ class Application
   private $loginController;
   private $registerController;
 
+  private $userStorage;
+  private $sessionHandler;
+
   private $isLoggedIn;
 
   public function __construct()
@@ -41,10 +44,11 @@ class Application
 
     $this->userStorage = new \Model\UserStorage();
     $this->userStorage->loadUsersFrom('users.json');
+    $this->sessionHandler = new \Model\SessionHandler();
 
-    $this->loginController = new \Controller\LoginController($this->loginView, $this->userStorage);
+    $this->loginController = new \Controller\LoginController($this->loginView, $this->sessionHandler, $this->userStorage);
     $this->registerController = new \Controller\RegisterController($this->registerView, $this->userStorage);
-    $this->todoController = new \Controller\TodoController($this->todoView);
+    $this->todoController = new \Controller\TodoController($this->todoView, $this->sessionHandler, $this->userStorage);
   }
 
   public function run(): void
