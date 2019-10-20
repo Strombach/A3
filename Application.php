@@ -11,10 +11,11 @@ require_once('View/LoginView.php');
 require_once('View/DateTimeView.php');
 require_once('View/LayoutView.php');
 require_once('View/RegisterView.php');
-// require_once('View/TodoView.php');
+require_once('View/TodoView.php');
 
 
 require_once('Controller/LoginController.php');
+require_once('Controller/TodoController.php');
 require_once('Controller/RegisterController.php');
 
 class Application
@@ -23,6 +24,7 @@ class Application
   private $layoutView;
   private $dateView;
   private $registerView;
+  private $todoView;
 
   private $loginController;
   private $registerController;
@@ -31,7 +33,8 @@ class Application
 
   public function __construct()
   {
-    $this->loginView = new \View\LoginView();
+    $this->todoView = new \View\TodoView();
+    $this->loginView = new \View\LoginView($this->todoView);
     $this->layoutView = new \View\LayoutView();
     $this->dateView = new \View\DateTimeView();
     $this->registerView = new \View\RegisterView();
@@ -41,6 +44,7 @@ class Application
 
     $this->loginController = new \Controller\LoginController($this->loginView, $this->userStorage);
     $this->registerController = new \Controller\RegisterController($this->registerView, $this->userStorage);
+    $this->todoController = new \Controller\TodoController($this->todoView);
   }
 
   public function run(): void
@@ -53,7 +57,7 @@ class Application
       $this->registerController->registration();
       $this->renderPageHTML($this->registerView);
     } else if ($this->isLoggedIn) {
-      echo "TODO";
+      $this->renderPageHTML($this->loginView);
     }
   }
 

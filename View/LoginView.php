@@ -12,6 +12,12 @@ class LoginView
   private static $messageId = 'LoginView::Message';
 
   private $message = '';
+  private $todoView;
+
+  public function __construct(\View\TodoView $todoView)
+  {
+    $this->todoView = $todoView;
+  }
 
   public function wantsToLogin(): bool
   {
@@ -51,7 +57,7 @@ class LoginView
     if (!$isLoggedIn) {
       $generateBodyHTML = $this->generateLoginFormHTML($this->message);
     } else {
-      $generateBodyHTML = $this->generateTodoHTML($this->message);
+      $generateBodyHTML = $this->generateLoggedInHTML($this->message);
     }
     return $generateBodyHTML;
   }
@@ -63,12 +69,13 @@ class LoginView
     }
   }
 
-  private function generateTodoHTML(string $message): string
+  private function generateLoggedInHTML(string $message): string
   {
     return '
-    <form  method="post" >
+    <form id="' . self::$logout . '" method="post" >
       <p id="' . self::$messageId . '">' . $message . '</p>
-      <input type="submit" name="' . self::$logout . '" value="logout"/>
+      ' . $this->todoView->generateBodyHTML() . '
+      <input type="submit" name="' . self::$logout . '" value="logout" form="' . self::$logout . '"/>
     </form>
     ';
   }
