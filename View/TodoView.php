@@ -6,17 +6,28 @@ class TodoView
 {
   private static $todoText = 'TodoView::TodoTextArea';
   private static $add = 'TodoView::TodoaddButton';
+  private static $complete = 'TodoView::CompleteTodo';
+  private static $delete = 'TodoView::DeleteTodo';
 
   private $username = '';
 
   private $nonCompleteTodos;
   private $completeTodos;
 
+
   public function wantsToAddTodo()
   {
-    if (isset($_POST[self::$add])) {
-      return $_POST[self::$todoText];
-    }
+    return isset($_POST[self::$add]);
+  }
+
+  public function getAddedTodo()
+  {
+    return $_POST[self::$todoText];
+  }
+
+  public function wantsToCompleteTodo()
+  {
+    return isset($_POST[self::$complete]);
   }
 
   public function setName(string $username)
@@ -58,11 +69,18 @@ class TodoView
 
   private function generateCompleteTodos()
   {
-    $ret = '<ul>';
+    $ret = '
+    <form id="' . self::$delete . '" method="post" ></form>
+    <ul>';
 
     if (!empty($this->completeTodos) > 0) {
       for ($i = 0; $i < sizeof($this->completeTodos); $i++) {
-        $ret .= '<li>' . $this->completeTodos[$i]->todo . '</li>';
+        $ret .= '
+        <li>
+        ' . $this->completeTodos[$i]->todo . '
+        </li>
+        <button name="' . self::$delete . '" value="' . $this->completeTodos[$i]->todo . '" form="' . self::$delete . '">Delete</button>
+        ';
       }
       $ret .= '</ul>';
     } else {
@@ -74,11 +92,18 @@ class TodoView
 
   private function generateRemainingTodos()
   {
-    $ret = '<ol>';
+    $ret = '
+    <form id="' . self::$complete . '" method="post" ></form>
+    <ol>';
 
     if (!empty($this->nonCompleteTodos) > 0) {
       for ($i = 0; $i < sizeof($this->nonCompleteTodos); $i++) {
-        $ret .= '<li>' . $this->nonCompleteTodos[$i]->todo . '</li>';
+        $ret .= '
+        <li>
+        ' . $this->nonCompleteTodos[$i]->todo . '
+        </li>
+        <button name="' . self::$complete . '" value="' . $this->nonCompleteTodos[$i]->todo . '" form="' . self::$complete . '">Complete</button>
+        ';
       }
       $ret .= '</ol>';
     } else {

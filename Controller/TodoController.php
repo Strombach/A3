@@ -25,6 +25,9 @@ class TodoController
     $this->presentLoggedInUser();
   }
 
+  public function updateTodos()
+  { }
+
   private function loadMemberData()
   {
     $loggedInUsername = $this->sessionHandler->getSessionValue(LoginController::$loginSession);

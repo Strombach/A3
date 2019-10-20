@@ -21,7 +21,7 @@ class RegisterController
     $this->registrationTester = new \Model\RegistrationTester();
   }
 
-  public function registration(): void
+  public function tryRegistration(): void
   {
     if ($this->view->wantsToRegister()) {
       $this->testUsernameInput();

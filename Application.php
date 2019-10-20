@@ -58,10 +58,11 @@ class Application
     if (!$this->registerView->wantsRegisterPage() && !$this->isLoggedIn) {
       $this->renderPageHTML($this->loginView);
     } else if ($this->registerView->wantsRegisterPage()) {
-      $this->registerController->registration();
+      $this->registerController->tryRegistration();
       $this->renderPageHTML($this->registerView);
     } else if ($this->isLoggedIn) {
       $this->todoController = new \Controller\TodoController($this->todoView, $this->sessionHandler, $this->userStorage);
+      $this->todoController->updateTodos();
       $this->renderPageHTML($this->loginView);
     }
   }
