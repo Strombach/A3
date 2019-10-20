@@ -43,8 +43,8 @@ class Application
     $this->dateView = new \View\DateTimeView();
     $this->registerView = new \View\RegisterView();
 
-    $this->userStorage = new \Model\UserStorage();
-    $this->userStorage->loadUsersFrom('users.json');
+    $this->userStorage = new \Model\UserStorage('users.json');
+    $this->userStorage->loadUsersFromFile();
     $this->sessionHandler = new \Model\SessionHandler();
 
     $this->loginController = new \Controller\LoginController($this->loginView, $this->sessionHandler, $this->userStorage);

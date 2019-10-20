@@ -30,6 +30,11 @@ class TodoView
     return isset($_POST[self::$complete]);
   }
 
+  public function wantsToDeleteTodo()
+  {
+    return isset($_POST[self::$delete]);
+  }
+
   public function setName(string $username)
   {
     $this->username = $username;

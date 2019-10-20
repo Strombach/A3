@@ -26,7 +26,18 @@ class TodoController
   }
 
   public function updateTodos()
-  { }
+  {
+    if ($this->view->wantsToAddTodo()) {
+      $this->addTodo();
+      $this->userStorage->loadUsersFromFile();
+      $this->presentNonCompleteTasks();
+    }
+  }
+
+  private function addTodo()
+  {
+    $this->userStorage->addTodoToUser($this->loggedInMember, $this->view->getAddedTodo());
+  }
 
   private function loadMemberData()
   {
