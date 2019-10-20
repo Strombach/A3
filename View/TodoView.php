@@ -103,6 +103,7 @@ class TodoView
         ' . $this->nonCompleteTodos[$i]->todo . '
         </li>
         <button name="' . self::$complete . '" value="' . $this->nonCompleteTodos[$i]->todo . '" form="' . self::$complete . '">Complete</button>
+        <button name="' . self::$delete . '" value="' . $this->nonCompleteTodos[$i]->todo . '" form="' . self::$delete . '">Delete</button>
         ';
       }
       $ret .= '</ol>';
