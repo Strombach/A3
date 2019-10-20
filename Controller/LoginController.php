@@ -53,7 +53,7 @@ class LoginController
     $foundUser = $this->userStorage->findUserByUserName($enteredUsername);
 
     if ($this->authenticator->hasValidPassword($foundUser, $enteredPassword)) {
-      $this->session->setSession(self::$loginSession);
+      $this->session->setLoginSession(self::$loginSession, $enteredUsername);
     }
   }
 
