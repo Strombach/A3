@@ -79,7 +79,7 @@ class RegisterView
     ';
   }
 
-  private function getPreviousEnteredUsername(): string
+  private function getPreviousEnteredUsername()
   {
     if (!empty($_POST[self::$name])) {
       return strip_tags($_POST[self::$name]);

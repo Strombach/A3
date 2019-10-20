@@ -57,7 +57,7 @@ class LoginView
   }
 
 
-  private function getPreviousEnteredUsername(): string
+  private function getPreviousEnteredUsername()
   {
     if (!empty($_POST[self::$name])) {
       return $_POST[self::$name];
