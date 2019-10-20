@@ -48,7 +48,6 @@ class Application
 
     $this->loginController = new \Controller\LoginController($this->loginView, $this->sessionHandler, $this->userStorage);
     $this->registerController = new \Controller\RegisterController($this->registerView, $this->userStorage);
-    $this->todoController = new \Controller\TodoController($this->todoView, $this->sessionHandler, $this->userStorage);
   }
 
   public function run(): void
@@ -61,6 +60,7 @@ class Application
       $this->registerController->registration();
       $this->renderPageHTML($this->registerView);
     } else if ($this->isLoggedIn) {
+      $this->todoController = new \Controller\TodoController($this->todoView, $this->sessionHandler, $this->userStorage);
       $this->renderPageHTML($this->loginView);
     }
   }

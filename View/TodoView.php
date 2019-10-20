@@ -7,6 +7,7 @@ class TodoView
   private static $todoText = 'TodoView::TodoTextArea';
   private static $add = 'TodoView::TodoaddButton';
 
+  private $username = '';
   private $nonCompleteTodos = array();
   private $completeTodos = array();
 
@@ -17,11 +18,16 @@ class TodoView
     }
   }
 
+  public function setName(string $username)
+  {
+    $this->username = $username;
+  }
+
   public function generateBodyHTML(): string
   {
     return '
     ' . $this->generateTodoFormHTML() . '
-    <h3>Remaining Todos</h3>
+    <h3>Remaining Todos for ' . $this->username . '</h3>
     ' . $this->generateRemainingTodos() . '
     <h3>Completed Todos</h3>
     ' . $this->generateCompleteTodos() . '
