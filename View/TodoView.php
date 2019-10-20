@@ -8,8 +8,9 @@ class TodoView
   private static $add = 'TodoView::TodoaddButton';
 
   private $username = '';
-  private $nonCompleteTodos = array();
-  private $completeTodos = array();
+
+  private $nonCompleteTodos;
+  private $completeTodos;
 
   public function wantsToAddTodo()
   {
@@ -21,6 +22,11 @@ class TodoView
   public function setName(string $username)
   {
     $this->username = $username;
+  }
+
+  public function setCompleteTodos($todos)
+  {
+    $this->completeTodos = $todos;
   }
 
   public function generateBodyHTML(): string
@@ -50,7 +56,9 @@ class TodoView
     $ret = '<ul>';
 
     if (!empty($this->completeTodos) > 0) {
-      for ($i = 0; $i < sizeof($this->completeTodos); $i++) { }
+      for ($i = 0; $i < sizeof($this->completeTodos); $i++) {
+        $ret .= '<li>' . $this->completeTodos[$i]->todo . '</li>';
+      }
       $ret .= '</ul>';
     } else {
       $ret = '<p>No completed tasks yet, get cracking!</p>';

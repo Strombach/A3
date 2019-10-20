@@ -2,7 +2,7 @@
 
 require_once('Model/Exceptions.php');
 require_once('Model/UserStorage.php');
-require_once('Model/MemberCredentials.php');
+require_once('Model/MemberData.php');
 require_once('Model/SessionHandler.php');
 require_once('Model/Authenticator.php');
 require_once('Model/RegistrationTester.php');

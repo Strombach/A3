@@ -8,18 +8,33 @@ class TodoController
   private $sessionHandler;
   private $userStorage;
 
+  private $loggedInMember;
+
   public function __construct(\View\TodoView $view, \Model\SessionHandler $session, \Model\UserStorage $storage)
   {
     $this->view = $view;
     $this->sessionHandler = $session;
     $this->userStorage = $storage;
 
+    $this->loadMemberData();
     $this->presentLoggedInUser();
+  }
+
+  private function loadMemberData()
+  {
+    $loggedInUsername = $this->sessionHandler->getSessionValue(LoginController::$loginSession);
+    $this->loggedInMember = $this->userStorage->findUserByUsername($loggedInUsername);
   }
 
   private function presentLoggedInUser()
   {
-    $loggedInUser = $this->sessionHandler->getSessionValue('LoginController::isLoggedIn');
-    $this->view->setName($loggedInUser);
+    $this->view->setName($this->loggedInMember->username);
+    $this->presentCompleteTasks();
+  }
+
+  private function presentCompleteTasks()
+  {
+    var_dump($this->loggedInMember->todos);
+    $this->view->setCompleteTodos($this->loggedInMember->todos);
   }
 }

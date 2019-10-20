@@ -4,7 +4,8 @@ namespace controller;
 
 class LoginController
 {
-  private static $loginSession = 'LoginController::isLoggedIn';
+  public static $loginSession = 'LoginController::isLoggedIn';
+
   private static $welcomeSession = 'LoginController::welcome';
   private static $byeSession = 'LoginController::bye';
 

@@ -4,7 +4,7 @@ namespace Model;
 
 class Authenticator
 {
-  public function hasValidPassword(\Model\MemberCredentials $member, string $enteredPassword): bool
+  public function hasValidPassword(\Model\MemberData $member, string $enteredPassword): bool
   {
     if ($member->password == $enteredPassword) {
       return true;

@@ -14,11 +14,11 @@ class UserStorage
     $this->members = json_decode($this->jsonData);
   }
 
-  public function findUserByUsername(string $username): \Model\MemberCredentials
+  public function findUserByUsername(string $username): \Model\MemberData
   {
     for ($i = 0; $i < sizeof($this->members); $i++) {
       if ($this->members[$i]->username === $username) {
-        $foundMember = new \Model\MemberCredentials($this->members[$i]->username, $this->members[$i]->password);
+        $foundMember = new \Model\MemberData($this->members[$i]->username, $this->members[$i]->password, $this->members[$i]->todos);
         return $foundMember;
       }
     }
