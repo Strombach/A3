@@ -51,11 +51,10 @@ class LoginView
     if (!$isLoggedIn) {
       $generateBodyHTML = $this->generateLoginFormHTML($this->message);
     } else {
-      $generateBodyHTML = $this->generateLogoutButtonHTML($this->message);
+      $generateBodyHTML = $this->generateTodoHTML($this->message);
     }
     return $generateBodyHTML;
   }
-
 
   private function getPreviousEnteredUsername()
   {
@@ -64,7 +63,7 @@ class LoginView
     }
   }
 
-  private function generateLogoutButtonHTML(string $message): string
+  private function generateTodoHTML(string $message): string
   {
     return '
     <form  method="post" >

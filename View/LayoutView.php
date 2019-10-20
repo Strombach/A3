@@ -17,7 +17,7 @@ class LayoutView
         </head>
         <body>
           <h1>Assignment 2</h1>
-          ' . $this->register($isLoggedIn) . '
+          ' . $this->renderNavLinks($isLoggedIn) . '
           ' . $this->renderIsLoggedIn($isLoggedIn) . '
           
           <div class="container">
@@ -39,12 +39,12 @@ class LayoutView
     }
   }
 
-  private function register(bool $isLoggedIn): string
+  private function renderNavLinks(bool $isLoggedIn): string
   {
     if (isset($_GET[self::$registerLocation]) && !$isLoggedIn) {
       return '<a href="?">Back to login</a>';
     } else if (!$isLoggedIn) {
-      return '<a href="?register">Register a new user</a>';
+      return '<a href="?' . self::$registerLocation . '">Register a new user</a>';
     } else {
       return '';
     }

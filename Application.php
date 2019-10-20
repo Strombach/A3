@@ -11,6 +11,8 @@ require_once('View/LoginView.php');
 require_once('View/DateTimeView.php');
 require_once('View/LayoutView.php');
 require_once('View/RegisterView.php');
+// require_once('View/TodoView.php');
+
 
 require_once('Controller/LoginController.php');
 require_once('Controller/RegisterController.php');
@@ -45,21 +47,18 @@ class Application
   {
     $this->isLoggedIn = $this->loginController->setUserLoginState();
 
-    if (!$this->registerView->wantsRegisterPage()) {
-      $this->renderLoginPageHTML();
-    } else {
+    if (!$this->registerView->wantsRegisterPage() && !$this->isLoggedIn) {
+      $this->renderPageHTML($this->loginView);
+    } else if ($this->registerView->wantsRegisterPage()) {
       $this->registerController->registration();
-      $this->renderRegisterPageHTML();
+      $this->renderPageHTML($this->registerView);
+    } else if ($this->isLoggedIn) {
+      echo "TODO";
     }
   }
 
-  private function renderLoginPageHTML(): void
+  private function renderPageHTML($pageToRender): void
   {
-    $this->layoutView->renderHTML($this->isLoggedIn, $this->loginView, $this->dateView);
-  }
-
-  private function renderRegisterPageHTML()
-  {
-    $this->layoutView->renderHTML($this->isLoggedIn, $this->registerView, $this->dateView);
+    $this->layoutView->renderHTML($this->isLoggedIn, $pageToRender, $this->dateView);
   }
 }

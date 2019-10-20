@@ -17,11 +17,9 @@ class LoginController
   public function __construct(\View\LoginView $view, \Model\UserStorage $userStorage)
   {
     $this->view = $view;
-
-    $this->session = new \Model\SessionHandler();
-
     $this->userStorage = $userStorage;
 
+    $this->session = new \Model\SessionHandler();
     $this->authenticator = new \Model\Authenticator();
   }
 
@@ -42,6 +40,7 @@ class LoginController
       $this->logoutUser();
     }
     $isLoggedIn = $this->isLoggedInBySession();
+
     return $isLoggedIn;
   }
 
