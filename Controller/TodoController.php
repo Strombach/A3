@@ -8,6 +8,8 @@ class TodoController
   private $sessionHandler;
   private $userStorage;
 
+  private $todoSorter;
+
   private $loggedInMember;
 
   public function __construct(\View\TodoView $view, \Model\SessionHandler $session, \Model\UserStorage $storage)
@@ -17,6 +19,9 @@ class TodoController
     $this->userStorage = $storage;
 
     $this->loadMemberData();
+
+    $this->todoSorter = new \Model\TodoSorter($this->loggedInMember);
+
     $this->presentLoggedInUser();
   }
 
@@ -30,10 +35,16 @@ class TodoController
   {
     $this->view->setName($this->loggedInMember->username);
     $this->presentCompleteTasks();
+    $this->presentNonCompleteTasks();
   }
 
   private function presentCompleteTasks()
   {
-    $this->view->setCompleteTodos($this->loggedInMember->todos);
+    $this->view->setCompleteTodos($this->todoSorter->getCompleted());
+  }
+
+  private function presentNonCompleteTasks()
+  {
+    $this->view->setNonCompleteTodos($this->todoSorter->getNonCompleted());
   }
 }
