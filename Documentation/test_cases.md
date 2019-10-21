@@ -1,11 +1,11 @@
 # Test Cases
 
-### Testcase 5.1: User can access his/her own todo list.
+## Testcase 5.1: User can access his/her own todo list.
 
-## Input
+### Input
 - Testcase 1.7
 
-## Output:
+### Output:
 
 - Testcase 1.7
 - The text "New Todo:" is shown.
@@ -18,51 +18,51 @@
 
 ![TestCase5.1](./img/TestCase5.1.png)
 
-### Test Case 6.1: Adding Todos
+## Test Case 6.1: Adding Todos
 
-## Input
+### Input
 - TestCase 5.1
 - Enter "Go Shopping".
 - Press "Add Todo" button.
 
-## Output
+### Output
 - The text "1. Go Shopping" is shown
 - A "Complete"-button is shown.
 - A "Delete"-button is shown.
 
 ![TestCase6.1](./img/TestCase6.1.png)
 
-### Test Case 7.1: Complete a todo
+## Test Case 7.1: Complete a todo
 
-## Input
+### Input
 - TestCase 6.1
 - Press "Complete" button.
 
-## Output
+### Output
 - The text "Go Shopping" is shown
 - A "Delete"-button is shown.
 
 ![TestCase7.1](./img/TestCase7.1.png)
 
-### Test Case 8.1: Delete a completed todo
+## Test Case 8.1: Delete a completed todo
 
-## Input
+### Input
 - TestCase 7.1
 - Press "Delete" button.
 
-## Output
+### Output
 - The text "Go Shopping" is removed
 - The text "No completed tasks yet, get cracking!" is shown instead
 
 ![TestCase8.1](./img/TestCase5.1.png)
 
-### Test Case 8.2: Delete a uncompleted todo
+## Test Case 8.2: Delete a uncompleted todo
 
-## Input
+### Input
 - TestCase 6.1
 - Press "Delete" button.
 
-## Output
+### Output
 - The text "Go Shopping" is removed
 - The text "Nothing to do yet" is shown instead
 
