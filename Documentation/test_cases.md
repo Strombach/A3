@@ -43,3 +43,28 @@
 - A "Delete"-button is shown.
 
 ![TestCase7.1](./img/TestCase7.1.png)
+
+### Test Case 8.1: Delete a completed todo
+
+## Input
+- TestCase 7.1
+- Press "Delete" button.
+
+## Output
+- The text "Go Shopping" is removed
+- The text "No completed tasks yet, get cracking!" is shown instead
+
+![TestCase8.1](./img/TestCase5.1.png)
+
+### Test Case 8.2: Delete a uncompleted todo
+
+## Input
+- TestCase 6.1
+- Press "Delete" button.
+
+## Output
+- The text "Go Shopping" is removed
+- The text "Nothing to do yet" is shown instead
+
+![TestCase8.2](./img/TestCase5.1.png)
+
