@@ -17,3 +17,16 @@
 - Teh text "No completed tasks yet, get cracking!" is shown.
 
 ![TestCase5.1](./img/TestCase5.1.png)
+
+### Test Case 6.1: Adding Todos
+
+## Input
+- TestCase 5.1
+- Enter "Go Shopping".
+- Press "Add Todo" button.
+
+## Output
+- The text "1. Go Shopping" is shown
+- A "Complete"-button is shown.
+- A "Delete"-button is shown.
+![TestCase6.1](./img/TestCase6.1.png)
