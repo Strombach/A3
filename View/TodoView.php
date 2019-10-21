@@ -69,6 +69,7 @@ class TodoView
   private function generateTodoFormHTML()
   {
     return '
+    <form id="' . self::$delete . '" method="post" ></form>
     <form id="' . self::$todoText . '" method="post" > 
       <label for="' . self::$todoText . '" >New Todo: </label>
         <input type="text" name=' . self::$todoText . '>
@@ -79,9 +80,7 @@ class TodoView
 
   private function generateCompleteTodos()
   {
-    $ret = '
-    <form id="' . self::$delete . '" method="post" ></form>
-    <ul>';
+    $ret = '<ul>';
 
     if (!empty($this->completeTodos) > 0) {
       for ($i = 0; $i < sizeof($this->completeTodos); $i++) {
@@ -103,7 +102,6 @@ class TodoView
   private function generateRemainingTodos()
   {
     $ret = '
-    <form id="' . self::$delete . '" method="post" ></form>
     <form id="' . self::$complete . '" method="post" ></form>
     <ol>';
 
