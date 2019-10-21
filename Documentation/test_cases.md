@@ -18,6 +18,13 @@
 
 ![TestCase5.1](./img/TestCase5.1.png)
 
+## Test case 5.2: User has his/hers private todo-list
+
+This one i don't know how to write.
+If you login with "Admin" and "Password" and run the testcases 6 and 7 an logout.
+Then login with "Admin1" and "Password1" and the name presented by "Remaining Todos for" should be "Admin1" and other todo-items should be listed. 
+
+
 ## Test Case 6.1: Adding Todos
 
 ### Input
