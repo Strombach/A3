@@ -103,6 +103,7 @@ class TodoView
   private function generateRemainingTodos()
   {
     $ret = '
+    <form id="' . self::$delete . '" method="post" ></form>
     <form id="' . self::$complete . '" method="post" ></form>
     <ol>';
 

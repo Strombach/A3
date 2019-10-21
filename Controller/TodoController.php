@@ -25,7 +25,8 @@ class TodoController
   {
     if ($this->view->wantsToAddTodo()) {
       $this->addTodo();
-    } else if ($this->view->wantsToDeleteTodo()) {
+    }
+    if ($this->view->wantsToDeleteTodo()) {
       $this->deleteTodo();
     }
     $this->updateView();
@@ -59,8 +60,8 @@ class TodoController
   private function presentLoggedInUser()
   {
     $this->view->setName($this->loggedInMember->username);
-    $this->presentCompleteTasks();
     $this->presentNonCompleteTasks();
+    $this->presentCompleteTasks();
   }
 
   private function presentCompleteTasks()
