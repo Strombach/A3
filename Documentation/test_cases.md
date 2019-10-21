@@ -14,7 +14,7 @@
 - The  text "Remaining Todos for Admin" is shown.
 - The text "Nothing to do yet" is shown.
 - The text "Completed Todos" is shown.
-- Teh text "No completed tasks yet, get cracking!" is shown.
+- The text "No completed tasks yet, get cracking!" is shown.
 
 ![TestCase5.1](./img/TestCase5.1.png)
 
@@ -29,4 +29,17 @@
 - The text "1. Go Shopping" is shown
 - A "Complete"-button is shown.
 - A "Delete"-button is shown.
+
 ![TestCase6.1](./img/TestCase6.1.png)
+
+### Test Case 7.1: Complete a todo
+
+## Input
+- TestCase 6.1
+- Press "Complete" button.
+
+## Output
+- The text "Go Shopping" is shown
+- A "Delete"-button is shown.
+
+![TestCase7.1](./img/TestCase7.1.png)

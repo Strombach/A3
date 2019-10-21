@@ -38,7 +38,7 @@ A user is authenticated and has added incomplete todos. See UC1 and UC6.
 3. Users presses the button for completing that todo.
 4. System moves the todo from the remaining todo list to the list for completed todos.
 
-# UC8. Completes item in todo-list.
+# UC8. Deletes item in todo-list.
 
 ### Preconditions
 A user is authenticated and has todos saved in the remaining or completed list. See UC1 and UC6.
