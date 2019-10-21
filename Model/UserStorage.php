@@ -60,6 +60,20 @@ class UserStorage
     $this->saveUsersToFile();
   }
 
+  public function completeTodoForUser(\Model\MemberData $member, string $todo)
+  {
+    for ($i = 0; $i < sizeof($this->members); $i++) {
+      if ($this->members[$i]->username === $member->username) {
+        for ($j = 0; $j < sizeof($this->members[$i]->todos); $j++) {
+          if ($this->members[$i]->todos[$j]->todo === $todo) {
+            $this->members[$i]->todos[$j]->complete = 1;
+          }
+        }
+      }
+    }
+    $this->saveUsersToFile();
+  }
+
   private function saveUsersToFile()
   {
     $updatedMembers = json_encode($this->members);

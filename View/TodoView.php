@@ -30,6 +30,11 @@ class TodoView
     return $_POST[self::$delete];
   }
 
+  public function getCompletedTodo()
+  {
+    return $_POST[self::$complete];
+  }
+
   public function wantsToCompleteTodo()
   {
     return isset($_POST[self::$complete]);
