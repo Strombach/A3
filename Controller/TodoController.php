@@ -25,8 +25,10 @@ class TodoController
   {
     if ($this->view->wantsToAddTodo()) {
       $this->addTodo();
-      $this->updateView();
+    } else if ($this->view->wantsToDeleteTodo()) {
+      $this->deleteTodo();
     }
+    $this->updateView();
   }
 
   public function updateView()
@@ -41,6 +43,11 @@ class TodoController
   private function addTodo()
   {
     $this->userStorage->addTodoToUser($this->loggedInMember, $this->view->getAddedTodo());
+  }
+
+  private function deleteTodo()
+  {
+    $this->userStorage->deleteTodoFromUser($this->loggedInMember, $this->view->getDeletedTodo());
   }
 
   private function loadMemberData()

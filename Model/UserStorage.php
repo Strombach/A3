@@ -46,6 +46,20 @@ class UserStorage
     $this->saveUsersToFile();
   }
 
+  public function deleteTodoFromUser(\Model\MemberData $member, string $todo)
+  {
+    for ($i = 0; $i < sizeof($this->members); $i++) {
+      if ($this->members[$i]->username === $member->username) {
+        for ($j = 0; $j < sizeof($this->members[$i]->todos); $j++) {
+          if ($this->members[$i]->todos[$j]->todo === $todo) {
+            array_splice($this->members[$i]->todos, $j, 1);
+          }
+        }
+      }
+    }
+    $this->saveUsersToFile();
+  }
+
   private function saveUsersToFile()
   {
     $updatedMembers = json_encode($this->members);
